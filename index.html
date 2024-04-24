@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Accessible Web Content</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f5;
+    color: #333;
+  }
+  .high-contrast {
+    background-color: #000;
+    color: #fff;
+  }
+  .accessible-btn {
+    padding: 10px;
+    margin: 5px;
+    cursor: pointer;
+  }
+</style>
+</head>
+<body>
+
+<div id="content">
+  <button class="accessible-btn" id="toggleContrast">Toggle High Contrast</button>
+  <button class="accessible-btn" id="increaseText">Increase Text Size</button>
+  <button class="accessible-btn" id="decreaseText">Decrease Text Size</button>
+  <h1>Accessible Web Content</h1>
+  <p>This is an example of making web content more accessible. Try the buttons above to adjust the contrast and text size.</p>
+  <img src="accessible-image.jpg" alt="Descriptive text about the image">
+</div>
+
+<script>
+  const content = document.getElementById('content');
+  const toggleContrast = document.getElementById('toggleContrast');
+  const increaseText = document.getElementById('increaseText');
+  const decreaseText = document.getElementById('decreaseText');
+
+  toggleContrast.addEventListener('click', () => {
+    content.classList.toggle('high-contrast');
+  });
+
+  increaseText.addEventListener('click', () => {
+    adjustTextSize(1);
+  });
+
+  decreaseText.addEventListener('click', () => {
+    adjustTextSize(-1);
+  });
+
+  function adjustTextSize(factor) {
+    document.querySelectorAll('p, h1, h2, h3, h4, h5, h6').forEach(element => {
+      const currentSize = window.getComputedStyle(element, null).getPropertyValue('font-size');
+      const newSize = parseFloat(currentSize) + factor;
+      element.style.fontSize = `${newSize}px`;
+    });
+  }
+</script>
+
+</body>
+</html>
